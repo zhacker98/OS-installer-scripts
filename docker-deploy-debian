@@ -1,0 +1,32 @@
+#! /bin/bash
+
+# docker-deploy-debian
+
+# VARIABLES
+
+# PRELIMINARY
+#Remove Old Versions of Docker
+apt-get remove docker docker-engine docker.io
+#Install Prereqs
+apt-get install \
+     apt-transport-https \
+     ca-certificates \
+     curl \
+     gnupg2 \
+     software-properties-common
+
+# MAIN
+#Adding Docker GPG Key
+curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg | apt-key add -
+#Adding Docker Repository
+add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") \
+   $(lsb_release -cs) \
+   stable"
+# Updating APT
+apt-get update
+# Getting Available Versions
+echo "Available Versions of Docker-CE"
+apt-cache madison docker-ce
+
+echo "INSTALL DOCKER WITH apt-get install docker-ce=<version>"
