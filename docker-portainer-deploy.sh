@@ -4,13 +4,15 @@
 #
 # Quick setup for Portainer
 #
+# Written by Joel E White
+#
 ######
 
 # VAR
-cert_dir="/root/local_certs"
 
 # PRE
-cd ${cert_dir}
+mkdir /root/local_certs
+cd /root/local_certs
 
 # Create SSL Certs
 openssl genrsa -out portainer.key 2048
